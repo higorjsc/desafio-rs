@@ -1,169 +1,248 @@
+/* --- RESET GERAL --- */
 body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      height: 100vh; /* Altura total da tela */
-      height: 100dvh; /* Altura dinâmica para mobile (ignora barra de navegação do browser) */
-      display: flex;
-      flex-direction: column;
-      background-color: #f0f0f0;
-      overflow: hidden; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f0f0;
+    overflow: hidden; 
+}
+
+/* --- HEADER --- */
+#header {
+    background: white;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 20;
+    display: flex;
+    flex-direction: column; /* Organiza em linhas verticais (Input em cima, status embaixo) */
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+/* Agrupa Input e Botão na primeira linha */
+.input-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+}
+
+#municipio {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    flex: 1; /* Ocupa espaço */
+    max-width: 400px;
+    outline: none;
+}
+#municipio:focus { border-color: #007bff; }
+
+#add-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+}
+#add-btn:active { background-color: #1e7e34; }
+
+#contador {
+    background: rgba(0,0,0,0.2);
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+/* --- LINHA DE STATUS (TIMER | RECORDE | MSG) --- */
+.container-timer-record-msg {
+    display: flex;
+    flex-direction: row; /* Garante lado a lado */
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    height: 30px; /* Altura fixa para evitar pulos */
+}
+
+.container-timer-record {
+    display: flex;
+    flex-direction: row; /* Garante lado a lado */
+    align-items: center;
+    justify-content: left;
+    gap: 8px;
+    height: 30px; /* Altura fixa para evitar pulos */
+}
+
+/* Estilo Base das Caixinhas */
+#timer-box, #record-box, #msg {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Preenche a altura da linha */
+    box-sizing: border-box;
+}
+
+/* Cores Específicas */
+#timer-box {
+    color: #dc3545;
+    background: #fff0f0;
+    border: 1px solid #ffc9c9;
+}
+
+#record-box {
+    color: #0056b3;
+    background: #e9ecef;
+    border: 1px solid #dee2e6;
+}
+
+/* MENSAGEM (Agora é uma caixinha flexível) */
+#msg {
+    position: static; /* Remove absolute */
+    margin: 0;
+    width: auto;
+    opacity: 0; /* Invisível por padrão */
+    transition: opacity 0.3s;
+    background: #d4edda; /* Verde claro padrão */
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    max-width: 200px; /* Limita largura para não quebrar layout */
+    overflow: hidden;
+    text-overflow: ellipsis; /* ... se o texto for muito longo */
+}
+
+#msg.visible {
+    opacity: 1;
+}
+
+/* --- MAPA E LISTA --- */
+#main-container {
+    display: flex;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+#map { flex: 1; background: #aad3df; z-index: 1; }
+
+#sidebar {
+    width: 250px;
+    background: #fff;
+    border-left: 2px solid #ddd;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+}
+
+#sidebar h3 {
+    margin: 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    font-size: 16px;
+    text-align: center;
+    color: #333;
+    position: sticky;
+    top: 0;
+}
+
+#city-list {
+    list-style-type: decimal;
+    margin: 0;
+    padding: 10px 10px 10px 35px;
+}
+
+#city-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    color: #333;
+}
+#city-list li.new-item { animation: highlight 1.5s ease; }
+@keyframes highlight {
+    0% { background-color: #d4edda; }
+    100% { background-color: transparent; }
+}
+
+.city-label {
+    padding: 2px 4px;
+    font-weight: bold;
+    font-size: 10px;
+    white-space: nowrap;
+    text-align: center;
+    transform: translate(-50%, 0%);
+    color: #ff0000;
+}
+.leaflet-div-icon { background: transparent; border: none; }
+
+/* --- MOBILE --- */
+@media (max-width: 768px) {
+    #main-container { flex-direction: column; }
+    
+    /* Input ocupa tudo */
+    .input-group { width: 100%; }
+    
+    /* Ajustes finos para caber na mesma linha no celular */
+    .container-timer-record-msg { 
+        gap: 5px; 
+    } 
+    .container-timer-record { 
+        gap: 5px; 
     }
 
-    /* --- 2. HEADER (BARRA DE CONTROLE) --- */
-    #header {
-      background: white;
-      padding: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      z-index: 20;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      flex-shrink: 0; /* Impede que o header encolha */
-      flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
-    }
-
-    #municipio {
-      padding: 10px;
-      font-size: 16px; /* 16px evita zoom automático no iPhone ao clicar */
-      border: 2px solid #ccc;
-      border-radius: 8px;
-      flex: 1; /* Ocupa o espaço disponível */
-      min-width: 200px;
-      outline: none;
-    }
-    #municipio:focus { border-color: #007bff; }
-
-    #add-btn {
-      padding: 10px 15px;
-      font-size: 16px;
-      background-color: #28a745;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      white-space: nowrap; /* Texto não quebra */
-    }
-    #add-btn:active { background-color: #1e7e34; } /* Feedback visual de toque */
-
-    #contador {
-      background: rgba(0,0,0,0.2);
-      padding: 2px 8px;
-      border-radius: 10px;
-      font-size: 14px;
-    }
-
-    #msg {
-      font-size: 13px;
-      font-weight: bold;
-      width: 100%; /* Em mobile, a mensagem fica numa linha nova */
-      text-align: center;
-      height: 20px; /* Reserva espaço para evitar pulos na tela */
-      margin-top: -5px;
-      display: none; /* Escondido por padrão, JavaScript mostra */
-    }
-    #msg.visible { display: block; }
-
-    /* --- 3. ÁREA PRINCIPAL (MAPA + LISTA) --- */
-    #main-container {
-      display: flex;
-      flex: 1; /* Ocupa todo o resto da altura */
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* MAPA */
-    #map {
-      flex: 1;
-      background: #aad3df;
-      z-index: 1;
-    }
-
-    /* LISTA LATERAL (DESKTOP) */
-    #sidebar {
-      width: 250px;
-      background: #fff;
-      border-left: 2px solid #ddd;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      z-index: 2;
-    }
-
-    #sidebar h3 {
-      margin: 0;
-      padding: 15px;
-      background: #f8f9fa;
-      border-bottom: 1px solid #eee;
-      font-size: 16px;
-      text-align: center;
-      color: #333;
-      position: sticky; /* Mantém o título no topo ao rolar */
-      top: 0;
-    }
-
-    #city-list {
-      list-style-type: decimal;
-      margin: 0;
-      padding: 10px 10px 10px 35px;
-    }
-
-    #city-list li {
-      padding: 8px 0; /* Mais fácil de ler */
-      border-bottom: 1px solid #f0f0f0;
-      font-size: 14px;
-      color: #333;
-    }
-
-    /* Animação */
-    #city-list li.new-item { animation: highlight 1.5s ease; }
-    @keyframes highlight {
-      0% { background-color: #d4edda; }
-      100% { background-color: transparent; }
-    }
-
-    /* Etiquetas no mapa */
-    .city-label {
-      padding: 2px 4px;
-      font-weight: bold;
-      font-size: 10px;
-      white-space: nowrap;
-      text-align: center;
-      transform: translate(-50%, 0%);
-      color: #ff0000;
+    #timer-box, #record-box, #msg {
+        font-size: 12px; /* Fonte menor */
+        padding: 5px 8px; /* Padding menor */
     }
     
-    .leaflet-div-icon { background: transparent; border: none; }
+    #map { height: 60%; width: 100%; flex: none; }
+    #sidebar { width: 100%; height: 40%; border-left: none; border-top: 2px solid #ddd; }
+}
 
-    /* --- 4. MEDIA QUERIES (MOBILE) --- */
-    @media (max-width: 768px) {
-      /* Muda para layout vertical */
-      #main-container {
-        flex-direction: column;
-      }
+/* ... (Mantenha todo o seu CSS anterior) ... */
 
-      /* Header mais compacto */
-      #header { padding: 8px; gap: 8px; }
-      #municipio { width: 100%; } /* Input ocupa linha inteira */
-      #add-btn { width: 100%; justify-content: center; } /* Botão grande */
+/* --- BOTÃO RECOMEÇAR (Centralizado no Mapa) --- */
+#restart-btn {
+    display: none; /* Escondido por padrão */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -10%) scale(0.7);/* Centraliza perfeitamente */
+    z-index: 1000; /* Fica acima do mapa */
+    
+    padding: 15px 30px;
+    font-size: px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    background-color: #dc3545; /* Vermelho */
+    border: 3px solid white;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    cursor: pointer;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-      /* Mapa ocupa 60% da tela disponível */
-      #map {
-        flex: none; /* Desliga o flex automático */
-        height: 60%; 
-        width: 100%;
-      }
+#restart-btn:hover {
+    background-color: #c82333;
+    transform: translate(-50%, -50%) scale(1.05); /* Cresce um pouco no hover */
+}
 
-      /* Lista ocupa 40% da tela disponível */
-      #sidebar {
-        width: 100%;
-        height: 40%;
-        border-left: none;
-        border-top: 2px solid #ddd;
-      }
-    }
+@keyframes popIn {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}

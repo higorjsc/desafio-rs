@@ -11,31 +11,35 @@
     </head>
     <body>
 
-    <div id="header">
+        <div id="header">
         <input id="municipio" type="text" placeholder="Digite o município..." autocomplete="off" />
         
         <button id="add-btn">
-        Adicionar cidade
-        <span id="contador">0</span>
+        Add <span id="contador">0</span>
         </button>
+
+        <div class="container-timer-record-msg">
+            <div class="container-timer-record">
+                <div id="timer-box">⏳ <span id="timer-val">03:00</span></div>
+                <div id="record-box">🏆 <span id="record-val">0</span></div>
+            </div>
+            <div id="msg"></div>
+        </div>
         
-        <div id="msg"></div>
     </div>
 
     <div id="main-container">
+        <button id="restart-btn">Recomeçar Jogo</button>
         <div id="map"></div>
-        
         <div id="sidebar">
         <h3>Acertos</h3>
-        <ol id="city-list">
-            </ol>
+        <ol id="city-list"></ol>
         </div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 
-    <script src="dados.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 
     </body>
     </html>

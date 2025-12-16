@@ -1,4 +1,4 @@
-const municipios = [
+export const municipios = [
     { name: 'Aceguá', lat: -31.864014, lng: -54.164731 },
     { name: 'Água Santa', lat: -28.175052, lng: -52.034632 },
     { name: 'Agudo', lat: -29.645662, lng: -53.25869 },
@@ -497,3 +497,4 @@ const municipios = [
     { name: 'Westfália', lat: -29.423449, lng: -51.766154 },
     { name: 'Xangri-Lá', lat: -29.805378, lng: -50.039081 }
 ];
+
