@@ -1,0 +1,136 @@
+    /* Reset e Layout Geral */
+    body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f0f0;
+    overflow: hidden; /* Evita scroll na página inteira */
+    }
+
+    /* BARRA DE CONTROLE (TOPO) */
+    #header {
+    background: white;
+    padding: 15px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    height: 60px; /* Altura fixa para cálculo do resto */
+    box-sizing: border-box;
+    }
+
+    #municipio {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    width: 250px;
+    outline: none;
+    transition: border 0.2s;
+    }
+    #municipio:focus { border-color: #007bff; }
+
+    #add-btn {
+    padding: 8px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaço entre texto e contador */
+    }
+    #add-btn:hover { background-color: #218838; }
+
+    #contador {
+    background: rgba(0,0,0,0.2);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 14px;
+    }
+
+    #msg {
+    font-size: 14px;
+    font-weight: bold;
+    min-width: 200px;
+    text-align: left;
+    }
+
+    /* ÁREA PRINCIPAL (MAPA + LISTA) */
+    #main-container {
+    display: flex;
+    flex: 1; /* Ocupa todo o espaço restante abaixo do header */
+    height: calc(100vh - 60px);
+    }
+
+    /* MAPA */
+    #map {
+    flex: 1; /* Cresce para ocupar o espaço disponível */
+    background: #aad3df;
+    cursor: default; /* Remove mãozinha */
+    }
+
+    /* LISTA LATERAL */
+    #sidebar {
+    width: 250px;
+    background: #fff;
+    border-left: 2px solid #ddd;
+    overflow-y: auto; /* Scroll vertical */
+    display: flex;
+    flex-direction: column;
+    }
+
+    #sidebar h3 {
+    margin: 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    font-size: 16px;
+    text-align: center;
+    color: #333;
+    }
+
+    #city-list {
+        list-style-type: decimal; /* Numeração */
+        margin: 0;
+        padding: 10px 10px 10px 35px; /* Espaço para os números */
+    }
+
+    #city-list li {
+        padding: 5px 0;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 14px;
+        color: #333;
+    }
+    
+    /* Animação suave na lista */
+    #city-list li.new-item {
+        animation: highlight 1.5s ease;
+    }
+    @keyframes highlight {
+        0% { background-color: #d4edda; }
+        100% { background-color: transparent; }
+    }
+
+    /* Estilo das etiquetas no mapa */
+    .city-label {
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: bold;
+        font-size: 11px;
+        white-space: nowrap;
+        text-align: center;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        color: red
+    }
+    
+    .leaflet-div-icon { background: transparent; border: none; }
