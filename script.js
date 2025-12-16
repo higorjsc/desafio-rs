@@ -5,7 +5,7 @@ import { municipios } from './dados.js';
 // ======================================================
 // AJUSTE O TEMPO AQUI (em segundos)
 // Ex: 180 = 3 minutos | 300 = 5 minutos | 60 = 1 minuto
-const TEMPO_LIMITE = 120;
+const TEMPO_LIMITE = 30;
 // ======================================================
 
 const addedCities = new Set();
