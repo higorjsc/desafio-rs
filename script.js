@@ -18,7 +18,7 @@ map.setView([-30.5, -53.5], 7);
 
 // Limites de navegação (Opcional: Impede que o usuário saia muito do RS)
 // Isso evita que o usuário se perca no oceano ao dar muito zoom out
-map.setMinZoom(7);
+map.setMinZoom(5);
 map.setMaxBounds([
     [-34.0, -58.0], // Sudoeste
     [-26.0, -49.0]  // Nordeste
