@@ -5,7 +5,7 @@ import { municipios } from './dados.js';
 // ======================================================
 // AJUSTE O TEMPO AQUI (em segundos)
 // Ex: 180 = 3 minutos | 300 = 5 minutos | 60 = 1 minuto
-const TEMPO_LIMITE = 60;
+const TEMPO_LIMITE = 30;
 // ======================================================
 
 const addedCities = new Set();
@@ -91,8 +91,6 @@ function resetTimer() {
 
 function gameOver() {
     clearInterval(timerInterval);
-    showMessage("TEMPO ESGOTADO!", "red");
-
     // 1. Desabilita inputs (Impede digitar)
     inp.disabled = true;
     btn.disabled = true;

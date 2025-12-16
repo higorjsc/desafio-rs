@@ -36,7 +36,6 @@ body {
     font-size: 16px;
     border-radius: 8px;
     flex: 1; /* Ocupa espaço */
-    max-width: 400px;
     outline: none;
 }
 #municipio:focus { border-color: #007bff; }
@@ -109,22 +108,29 @@ body {
     border: 1px solid #dee2e6;
 }
 
-/* MENSAGEM (Agora é uma caixinha flexível) */
 #msg {
-    position: static; /* Remove absolute */
     margin: 0;
     width: auto;
-    opacity: 0; /* Invisível por padrão */
+    opacity: 0;
     transition: opacity 0.3s;
-    background: #d4edda; /* Verde claro padrão */
+    background: #d4edda;
     color: #155724;
     border: 1px solid #c3e6cb;
-    max-width: 200px; /* Limita largura para não quebrar layout */
+    /* Ajustes para flexbox */
+    display: none; /* Começa escondido (flex quando visível) */
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* ... se o texto for muito longo */
+    text-overflow: ellipsis;
 }
 
 #msg.visible {
+    display: flex; /* Flex para alinhar texto */
     opacity: 1;
 }
 
@@ -214,35 +220,37 @@ body {
 }
 
 /* ... (Mantenha todo o seu CSS anterior) ... */
-
-/* --- BOTÃO RECOMEÇAR (Centralizado no Mapa) --- */
+/* BOTÃO RECOMEÇAR (Estilo Header) */
 #restart-btn {
     display: none; /* Escondido por padrão */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -10%) scale(0.7);/* Centraliza perfeitamente */
-    z-index: 1000; /* Fica acima do mapa */
-    
-    padding: 15px 30px;
-    font-size: px;
+    padding: 6px 12px;
+    font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
     color: white;
     background-color: #dc3545; /* Vermelho */
-    border: 3px solid white;
-    border-radius: 50px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    border: 1px solid #bd2130;
+    border-radius: 6px;
     cursor: pointer;
-    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    white-space: nowrap;
+    animation: fadeIn 0.3s ease;
+    height: 100%; /* Mesma altura dos outros boxes */
 }
 
 #restart-btn:hover {
     background-color: #c82333;
-    transform: translate(-50%, -50%) scale(1.05); /* Cresce um pouco no hover */
 }
 
-@keyframes popIn {
-    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* AJUSTE MOBILE */
+@media (max-width: 768px) {
+    #restart-btn {
+        font-size: 12px;
+        padding: 5px 10px;
+        width: 100%; /* Ocupa espaço se quebrar linha */
+    }
 }
